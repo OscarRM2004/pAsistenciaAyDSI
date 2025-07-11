@@ -1,0 +1,432 @@
+package codenine.vista;
+
+import codenine.dto.ReporteDTO;
+import codenine.modelo.ReporteImpl;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import codenine.modelo.VistaMensajes;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
+public class ReportesPanel extends javax.swing.JPanel {
+    private Menu menuPrincipal;
+    public ReportesPanel(Menu menu) {
+        initComponents();
+        this.menuPrincipal = menu;
+        VistaMensajes.mensaje();
+    }
+
+    void CargarTabla(ReporteDTO dto) {
+        ReporteImpl proc = new ReporteImpl();
+        tbReporte.setModel(proc.tablaReporte(dto));
+    }
+
+    
+    private Date[] mergeSort(Date[] array) {
+        if (array.length <= 1) {
+            return array;
+        }
+        int middle = array.length / 2;
+        Date[] left = new Date[middle];
+        Date[] right = new Date[array.length - middle];
+
+        System.arraycopy(array, 0, left, 0, middle);
+        System.arraycopy(array, middle, right, 0, array.length - middle);
+
+        left = mergeSort(left);
+        right = mergeSort(right);
+
+        return merge(left, right);
+    }
+
+    private Date[] merge(Date[] left, Date[] right) {
+        Date[] result = new Date[left.length + right.length];
+        int i = 0, j = 0, k = 0;
+
+        while (i < left.length && j < right.length) {
+            if (left[i].after(right[j])) {
+                result[k++] = left[i++];
+            } else {
+                result[k++] = right[j++];
+            }
+        }
+
+        while (i < left.length) {
+            result[k++] = left[i++];
+        }
+        while (j < right.length) {
+            result[k++] = right[j++];
+        }
+
+        return result;
+    }
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbReporte = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        cartel = new javax.swing.JPanel();
+        txtFechaInicio = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
+        txtFechaFin = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        NUEVOS = new javax.swing.JButton();
+        VIEJOS = new javax.swing.JButton();
+        lista = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(850, 560));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        tbReporte.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tbReporte);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
+        );
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setText("REPORTE DE ASISTENCIA DEL PERSONAL");
+
+        cartel.setBackground(new java.awt.Color(255, 255, 255));
+        cartel.setBorder(javax.swing.BorderFactory.createTitledBorder("Formulario"));
+
+        jLabel1.setText("Fecha Inicio:");
+
+        btnBuscar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lupa.png"))); // NOI18N
+        btnBuscar.setText("BUSCAR");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Fecha Fin:");
+
+        NUEVOS.setText("ASCENDENTE");
+        NUEVOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NUEVOSActionPerformed(evt);
+            }
+        });
+
+        VIEJOS.setText("DESCENDENTE");
+        VIEJOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VIEJOSActionPerformed(evt);
+            }
+        });
+
+        lista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "A. Paterno", "A. Materno", "Sexo", "Cargo", "Area", "Ocurrencia", "Fecha" }));
+        lista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout cartelLayout = new javax.swing.GroupLayout(cartel);
+        cartel.setLayout(cartelLayout);
+        cartelLayout.setHorizontalGroup(
+            cartelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cartelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(cartelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cartelLayout.createSequentialGroup()
+                        .addComponent(lista, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addComponent(NUEVOS, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(cartelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(23, 23, 23)
+                        .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)))
+                .addGap(18, 18, 18)
+                .addGroup(cartelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFechaFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(VIEJOS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnBuscar)
+                .addGap(11, 11, 11))
+        );
+        cartelLayout.setVerticalGroup(
+            cartelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cartelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cartelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(cartelLayout.createSequentialGroup()
+                        .addGroup(cartelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(cartelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(cartelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(cartelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(VIEJOS, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NUEVOS, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lista, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(16, 16, 16))
+        );
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/regresar.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cartel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(150, 150, 150)
+                        .addComponent(jButton1)
+                        .addGap(8, 8, 8))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(cartel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        ReporteDTO dto = new ReporteDTO();
+        Date date1 = txtFechaInicio.getDate();
+        Date date2 = txtFechaFin.getDate();
+
+        if (date1 == null) {
+            JOptionPane.showMessageDialog(null, "Debe Colocar Fecha Inicio");
+        } else if (date2 == null) {
+            JOptionPane.showMessageDialog(null, "Debe Colocar Fecha Fin");
+        } else {
+
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaInicio = null;
+            String fechaFin = null;
+            fechaInicio = format1.format(date1);
+            fechaFin = format2.format(date2);
+
+            dto.setFechaInicio(fechaInicio);
+            dto.setFechaFin(fechaFin);
+
+            CargarTabla(dto);
+        }
+
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void NUEVOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NUEVOSActionPerformed
+        ordenarPorColumna(lista.getSelectedIndex(), true);
+    }//GEN-LAST:event_NUEVOSActionPerformed
+
+    private void VIEJOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VIEJOSActionPerformed
+
+        ordenarPorColumna(lista.getSelectedIndex(), false);
+    }//GEN-LAST:event_VIEJOSActionPerformed
+
+    private void listaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaActionPerformed
+
+    private Date[] mergeAbajo(Date[] left, Date[] right) {
+        Date[] result = new Date[left.length + right.length];
+        int i = 0, j = 0, k = 0;
+
+        while (i < left.length && j < right.length) {
+            if (left[i].before(right[j])) {  
+                result[k++] = left[i++];
+            } else {
+                result[k++] = right[j++];
+            }
+        }
+
+        while (i < left.length) {
+            result[k++] = left[i++];
+        }
+        while (j < right.length) {
+            result[k++] = right[j++];
+        }
+        return result;
+    }
+    private Date[] mergeSortabajo(Date[] array) {
+        if (array.length <= 1) {
+            return array;
+        }
+        int middle = array.length / 2;
+        Date[] left = new Date[middle];
+        Date[] right = new Date[array.length - middle];
+
+        System.arraycopy(array, 0, left, 0, middle);
+        System.arraycopy(array, middle, right, 0, array.length - middle);
+
+        left = mergeSortabajo(left);
+        right = mergeSortabajo(right);
+        return mergeAbajo(left, right);
+    }
+    
+    
+    private void ordenarPorFecha() {
+        int rowCount = tbReporte.getRowCount();
+        Date[] fechas = new Date[rowCount];
+
+        for (int i = 0; i < rowCount; i++) {
+            try {
+                String fechaStr = tbReporte.getValueAt(i, 7).toString(); 
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                fechas[i] = sdf.parse(fechaStr);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al parsear fechas: " + e.getMessage());
+                return; 
+            }
+        }
+
+        fechas = mergeSort(fechas);
+
+        for (int i = 0; i < rowCount; i++) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            tbReporte.setValueAt(sdf.format(fechas[i]), i, 7); 
+        }
+    }
+
+    private void ordenarPorFecha2() {
+        int rowCount = tbReporte.getRowCount();
+        Date[] fechas = new Date[rowCount];
+
+        for (int i = 0; i < rowCount; i++) {
+            try {
+                String fechaStr = tbReporte.getValueAt(i, 7).toString(); 
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                fechas[i] = sdf.parse(fechaStr);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al parsear fechas: " + e.getMessage());
+                return; 
+            }
+        }
+
+        fechas = mergeSortabajo(fechas);
+
+        for (int i = 0; i < rowCount; i++) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            tbReporte.setValueAt(sdf.format(fechas[i]), i, 7); 
+        }
+    }
+    
+
+
+    private void ordenarPorColumna(int columnIndex, boolean ascendente) {
+        DefaultTableModel model = (DefaultTableModel) tbReporte.getModel();
+        int rowCount = model.getRowCount();
+        List<Object[]> filas = new ArrayList<>();
+
+        for (int i = 0; i < rowCount; i++) {
+            Object[] fila = new Object[model.getColumnCount()];
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                fila[j] = model.getValueAt(i, j);
+            }
+            filas.add(fila);
+        }
+
+        if (columnIndex == 7) { 
+            if (ascendente) {
+                ordenarPorFecha(); 
+            } else {
+                ordenarPorFecha2();  
+            }
+        } else {  
+            filas.sort((fila1, fila2) -> {
+                Object valor1 = fila1[columnIndex];
+                Object valor2 = fila2[columnIndex];
+
+                if (valor1 instanceof Comparable && valor2 instanceof Comparable) {
+                    Comparable<Object> comparable1 = (Comparable<Object>) valor1;
+                    Comparable<Object> comparable2 = (Comparable<Object>) valor2;
+                    return ascendente ? comparable1.compareTo(comparable2) : comparable2.compareTo(comparable1);
+                }
+                return 0; 
+            });
+
+            model.setRowCount(0);
+            for (Object[] fila : filas) {
+                model.addRow(fila);
+            }
+        }
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (menuPrincipal != null) {
+            menuPrincipal.limpiarPanelContenido();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton NUEVOS;
+    private javax.swing.JButton VIEJOS;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JPanel cartel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> lista;
+    private javax.swing.JTable tbReporte;
+    private com.toedter.calendar.JDateChooser txtFechaFin;
+    private com.toedter.calendar.JDateChooser txtFechaInicio;
+    // End of variables declaration//GEN-END:variables
+}
