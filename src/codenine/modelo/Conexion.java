@@ -14,8 +14,8 @@ public class Conexion {
     String url = "jdbc:mysql://136.0.42.211:3306/ASISTENCIA?serverTimezone=UTC";
     String drv = "com.mysql.cj.jdbc.Driver";
     // Credenciales del usuario que creaste en el VPS
-    String usu = "admin";
-    String pass = "admin123"; // <-- La contraseña que definiste
+    String usu = "asistencia_user";
+    String pass = "StrongPassword123!"; // <-- La contraseña que definiste
 
     public Statement stm = null;
     ResultSet rs = null;

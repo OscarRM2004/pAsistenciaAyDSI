@@ -5,6 +5,7 @@ import codenine.dto.OcurrenciaDto;
 import codenine.dto.AreaDTO;
 import codenine.interfaz.AsistenciaInterfaz;
 import codenine.interfaz.AreaInterfaz;
+import codenine.interfaz.PersonaInterfaz;
 import codenine.modelo.AsistenciaImpl;
 
 import java.text.SimpleDateFormat;
@@ -13,7 +14,9 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import codenine.modelo.AreaImpl;
+import codenine.modelo.PersonaImpl;
 import codenine.modelo.VistaMensajes;
+import javax.swing.table.DefaultTableModel;
 
 public class PrincipalPanel extends javax.swing.JPanel {
 
@@ -24,116 +27,31 @@ public class PrincipalPanel extends javax.swing.JPanel {
         initComponents();
         this.menuPrincipal = menu;
         VistaMensajes.mensaje();
-        CargarTablaIndex();
-        CargarComboBox();
-        CargarComboBoxArea();
-        txtFecha.setEnabled(false);
+        CargarTablaPersonas();
     }
-
-    void CargarComboBox() {
-
-        AsistenciaInterfaz proc = new AsistenciaImpl();
-        comboBox.setModel(proc.combo());
-
-        tbAsistencia.setRowHeight(22);
-
-        tbAsistencia.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(comboBox));
-        tbAsistencia.setDefaultRenderer(Object.class, new CeldaRenderer(6));
-    }
-
-    void CargarComboBoxArea() {
-        AreaInterfaz proc = new AreaImpl();
-        cmbArea.setModel(proc.combo());
-    }
-
-    void CargarTabla(AreaDTO cmbo) {
-        AsistenciaInterfaz proc = new AsistenciaImpl();
-        tbAsistencia.setModel(proc.tablaAsistencia(cmbo));
-        tbAsistencia.getColumnModel().getColumn(0).setPreferredWidth(10);
-        tbAsistencia.getColumnModel().getColumn(1).setPreferredWidth(20);
-        tbAsistencia.getColumnModel().getColumn(2).setPreferredWidth(20);
-        tbAsistencia.getColumnModel().getColumn(3).setPreferredWidth(20);
-        tbAsistencia.getColumnModel().getColumn(4).setPreferredWidth(10);
-        tbAsistencia.getColumnModel().getColumn(5).setPreferredWidth(40);
-        tbAsistencia.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(comboBox));
-        tbAsistencia.getColumnModel().getColumn(7).setPreferredWidth(100);
-
-    }
-
-    void CargarTablaIndex() {
-        AsistenciaInterfaz proc = new AsistenciaImpl();
-        tbAsistencia.setModel(proc.tabla());
+    
+    void CargarTablaPersonas() {
+        PersonaImpl proc = new PersonaImpl(); // 'PersonaImpl' ahora es nuestro DAO de personas
+        tbUsuariosWeb.setModel(proc.tablaCredencialesWeb());
     }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbAsistencia = new javax.swing.JTable();
-        btnEliminar = new javax.swing.JButton();
-        btnAgregar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        cmbArea = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        btnBuscar = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        txtFecha = new com.toedter.calendar.JDateChooser();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         btnRegresar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbUsuariosWeb = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnCrearCuentaWeb = new javax.swing.JButton();
+        txtNewPassword = new javax.swing.JPasswordField();
+        txtWebUser = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(850, 560));
-
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-
-        tbAsistencia.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "N°", "Nombre", "Opciones", "Detalles"
-            }
-        ));
-        jScrollPane1.setViewportView(tbAsistencia);
-
-        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-
-        btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/registrar_1.png"))); // NOI18N
-        btnAgregar.setText("REGISTRAR ASISTENCIA");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("AREA:");
-
-        cmbArea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setText("CONTROL DE ASISTENCIA DEL PERSONAL");
-
-        btnBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lupa.png"))); // NOI18N
-        btnBuscar.setText("BUSCAR");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("FECHA:");
-
-        txtFecha.setBackground(new java.awt.Color(255, 255, 255));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/regresar.png"))); // NOI18N
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -142,12 +60,35 @@ public class PrincipalPanel extends javax.swing.JPanel {
             }
         });
 
-        btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/update_2.png"))); // NOI18N
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setText("Cuentas");
+
+        tbUsuariosWeb.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tbUsuariosWeb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbUsuariosWebMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbUsuariosWeb);
+
+        jLabel1.setText("Email (Usuario):");
+
+        jLabel3.setText("Contraseña:");
+
+        btnCrearCuentaWeb.setText("CREAR/ACTUALIZAR CUENTA");
+        btnCrearCuentaWeb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
+                btnCrearCuentaWebActionPerformed(evt);
             }
         });
 
@@ -156,143 +97,55 @@ public class PrincipalPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
+                        .addGap(69, 69, 69)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3))
-                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cmbArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(btnAgregar)
-                            .addGap(15, 15, 15)
-                            .addComponent(btnActualizar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnEliminar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 773, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                                    .addComponent(txtWebUser)
+                                    .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnCrearCuentaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(362, 362, 362)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(cmbArea, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addComponent(jLabel3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnBuscar))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnEliminar)
-                        .addComponent(btnActualizar)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(407, 407, 407)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtWebUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(btnCrearCuentaWeb)
+                        .addGap(161, 161, 161))))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
-        AsistenciaInterfaz proc = new AsistenciaImpl();
-        AsistenciaDTO dto = new AsistenciaDTO();
-        Date date = txtFecha.getDate();
-
-        if (date == null) {
-            JOptionPane.showMessageDialog(null, "Debe Colocar Fecha");
-        } else {
-
-            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-            String fecha = null;
-            fecha = format1.format(date);
-
-            for (int i = 0; i < tbAsistencia.getRowCount(); i++) {
-                Object f = tbAsistencia.getModel().getValueAt(i, 1);
-                Object g = tbAsistencia.getModel().getValueAt(i, 2);
-                dto.setNombre(f + " " + g);
-                OcurrenciaDto c6 = (OcurrenciaDto) tbAsistencia.getValueAt(i, 6);
-
-                int c0 = (int) tbAsistencia.getValueAt(i, 0);
-                dto.setIdpersona(c0);
-                dto.setFecha(fecha);
-
-                proc.eliminar(dto);
-
-                System.out.println("vuelta: " + i + f);
-            }
-        }
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
-        AsistenciaInterfaz proc = new AsistenciaImpl();
-        AsistenciaDTO dto = new AsistenciaDTO();
-        Date date = txtFecha.getDate();
-
-        if (date == null) {
-            JOptionPane.showMessageDialog(null, "Debe Colocar Fecha");
-        } else {
-
-            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-            String fecha = null;
-            fecha = format1.format(date);
-
-            for (int i = 0; i < tbAsistencia.getRowCount(); i++) {
-                Object f = tbAsistencia.getModel().getValueAt(i, 1);
-                Object g = tbAsistencia.getModel().getValueAt(i, 2);
-                dto.setNombre(f + " " + g);
-
-                OcurrenciaDto c6 = (OcurrenciaDto) tbAsistencia.getValueAt(i, 6);
-
-                if (c6 == null) {
-                    JOptionPane.showMessageDialog(null, "Seleccione una ocurrencia");
-                } else {
-                    int c0 = (int) tbAsistencia.getValueAt(i, 0);
-                    String c7 = (String) tbAsistencia.getValueAt(i, 7);
-                    dto.setIdpersona(c0);
-                    dto.setFecha(fecha);
-                    dto.setOcurrencia(String.valueOf(c6.getIdOcurrencia()));
-                    dto.setDetalle(c7);
-
-                    proc.registrar(dto);
-                }
-                System.out.println("vuelta: " + i + " - " + dto.getIdpersona() + " " + dto.getFecha());
-            }
-        }
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        AreaDTO cmbo = (AreaDTO) cmbArea.getSelectedItem();
-        CargarTabla(cmbo);
-        txtFecha.setEnabled(true);
-    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         if (menuPrincipal != null) {
@@ -300,57 +153,64 @@ public class PrincipalPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+    private void tbUsuariosWebMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosWebMouseClicked
+        // Obtenemos el modelo de la tabla
+        DefaultTableModel model = (DefaultTableModel) tbUsuariosWeb.getModel();
 
-        AsistenciaInterfaz proc = new AsistenciaImpl();
-        AsistenciaDTO dto = new AsistenciaDTO();
-        Date date = txtFecha.getDate();
+        // Obtenemos el índice de la fila seleccionada
+        int selectedRow = tbUsuariosWeb.getSelectedRow();
 
-        if (date == null) {
-            JOptionPane.showMessageDialog(null, "Debe Colocar Fecha");
-        } else {
+        // Verificamos que se haya seleccionado una fila válida
+        if (selectedRow >= 0) {
+            // Obtenemos el email de la segunda columna (índice 1) de la fila seleccionada
+            String email = model.getValueAt(selectedRow, 1).toString();
 
-            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-            String fecha = null;
-            fecha = format1.format(date);
+            // Ponemos el email en el campo de texto correspondiente
+            // Asumo que el campo de texto se llama 'txtWebUser' o similar
+            txtWebUser.setText(email); 
 
-            for (int i = 0; i < tbAsistencia.getRowCount(); i++) {
-                Object f = tbAsistencia.getModel().getValueAt(i, 1);
-                Object g = tbAsistencia.getModel().getValueAt(i, 2);
-                dto.setNombre(f + " " + g);
-                OcurrenciaDto c6 = (OcurrenciaDto) tbAsistencia.getValueAt(i, 6);
-
-                if (c6 == null) {
-                    JOptionPane.showMessageDialog(null, "Seleccione una ocurrencia");
-                } else {
-                    int c0 = (int) tbAsistencia.getValueAt(i, 0);
-                    String c7 = (String) tbAsistencia.getValueAt(i, 7);
-
-                    dto.setIdpersona(c0);
-                    dto.setFecha(fecha);
-                    dto.setOcurrencia(c6.getDescripcion());
-                    dto.setDetalle(c7);
-
-                    proc.actualizar(dto);
-                }
-                System.out.println("vuelta: " + i + f);
-            }
+            // Limpiamos el campo de contraseña para que el admin escriba una nueva
+            // Asumo que el campo de contraseña se llama 'txtNewPassword'
+            txtNewPassword.setText(""); 
         }
-    }//GEN-LAST:event_btnActualizarActionPerformed
+    }//GEN-LAST:event_tbUsuariosWebMouseClicked
+
+    private void btnCrearCuentaWebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaWebActionPerformed
+        String email = txtWebUser.getText();
+        String password = new String(txtNewPassword.getPassword());
+
+        if (email.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un usuario de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (password.isEmpty() || password.length() < 6) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese una contraseña válida (mínimo 6 caracteres).", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        PersonaImpl per = new PersonaImpl();
+        // Usamos el método que ya habíamos preparado para actualizar la contraseña
+        boolean exito = per.actualizarPasswordWeb(email, password);
+
+        if (exito) {
+            JOptionPane.showMessageDialog(this, "Contraseña actualizada exitosamente para el usuario " + email);
+            txtNewPassword.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error al actualizar la contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnCrearCuentaWebActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnCrearCuentaWeb;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> cmbArea;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbAsistencia;
-    private com.toedter.calendar.JDateChooser txtFecha;
+    private javax.swing.JTable tbUsuariosWeb;
+    private javax.swing.JPasswordField txtNewPassword;
+    private javax.swing.JTextField txtWebUser;
     // End of variables declaration//GEN-END:variables
 }
