@@ -10,6 +10,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import java.io.FileOutputStream;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import com.google.common.base.Strings;
 
 public class ReportesPanel extends javax.swing.JPanel {
     private Menu menuPrincipal;
@@ -81,9 +92,11 @@ public class ReportesPanel extends javax.swing.JPanel {
         VIEJOS = new javax.swing.JButton();
         lista = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        btnExportar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(850, 560));
+        setPreferredSize(new java.awt.Dimension(1000, 550));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -103,7 +116,10 @@ public class ReportesPanel extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,8 +128,11 @@ public class ReportesPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
         );
 
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 239, 988, -1));
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("REPORTE DE ASISTENCIA DEL PERSONAL");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, -1));
 
         cartel.setBackground(new java.awt.Color(255, 255, 255));
         cartel.setBorder(javax.swing.BorderFactory.createTitledBorder("Formulario"));
@@ -161,7 +180,7 @@ public class ReportesPanel extends javax.swing.JPanel {
                 .addGroup(cartelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cartelLayout.createSequentialGroup()
                         .addComponent(lista, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
                         .addComponent(NUEVOS, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(cartelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -199,87 +218,24 @@ public class ReportesPanel extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
+        add(cartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 930, -1));
+
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/regresar.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cartel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(150, 150, 150)
-                        .addComponent(jButton1)
-                        .addGap(8, 8, 8))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(cartel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
+        btnExportar.setText("Exportar a Excel");
+        btnExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarActionPerformed(evt);
+            }
+        });
+        add(btnExportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 500, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        ReporteDTO dto = new ReporteDTO();
-        Date date1 = txtFechaInicio.getDate();
-        Date date2 = txtFechaFin.getDate();
-
-        if (date1 == null) {
-            JOptionPane.showMessageDialog(null, "Debe Colocar Fecha Inicio");
-        } else if (date2 == null) {
-            JOptionPane.showMessageDialog(null, "Debe Colocar Fecha Fin");
-        } else {
-
-            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaInicio = null;
-            String fechaFin = null;
-            fechaInicio = format1.format(date1);
-            fechaFin = format2.format(date2);
-
-            dto.setFechaInicio(fechaInicio);
-            dto.setFechaFin(fechaFin);
-
-            CargarTabla(dto);
-        }
-
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void NUEVOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NUEVOSActionPerformed
-        ordenarPorColumna(lista.getSelectedIndex(), true);
-    }//GEN-LAST:event_NUEVOSActionPerformed
-
-    private void VIEJOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VIEJOSActionPerformed
-
-        ordenarPorColumna(lista.getSelectedIndex(), false);
-    }//GEN-LAST:event_VIEJOSActionPerformed
-
-    private void listaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaActionPerformed
 
     private Date[] mergeAbajo(Date[] left, Date[] right) {
         Date[] result = new Date[left.length + right.length];
@@ -411,12 +367,106 @@ public class ReportesPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
+        // 1. Verificar si hay datos en la tabla
+        if (tbReporte.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No hay datos en la tabla para exportar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 2. Abrir un diálogo para que el usuario elija dónde guardar el archivo
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar reporte como");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos de Excel (*.xlsx)", "xlsx"));
+
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            java.io.File fileToSave = fileChooser.getSelectedFile();
+            // Asegurarse de que el archivo tenga la extensión .xlsx
+            String filePath = fileToSave.getAbsolutePath();
+            if (!filePath.endsWith(".xlsx")) {
+                fileToSave = new java.io.File(filePath + ".xlsx");
+            }
+
+            // 3. Crear el libro y la hoja de Excel
+            Workbook workbook = new XSSFWorkbook();
+            Sheet sheet = workbook.createSheet("Reporte de Asistencia");
+
+            // 4. Escribir las cabeceras
+            DefaultTableModel model = (DefaultTableModel) tbReporte.getModel();
+            Row headerRow = sheet.createRow(0);
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(model.getColumnName(i));
+            }
+
+            // 5. Escribir los datos de las filas
+            for (int i = 0; i < model.getRowCount(); i++) {
+                Row row = sheet.createRow(i + 1);
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    Cell cell = row.createCell(j);
+                    Object value = model.getValueAt(i, j);
+                    cell.setCellValue(Strings.nullToEmpty(value != null ? value.toString() : null));
+                }
+            }
+
+            // 6. Guardar el archivo
+            try (FileOutputStream outputStream = new FileOutputStream(fileToSave)) {
+                workbook.write(outputStream);
+                JOptionPane.showMessageDialog(this, "Reporte exportado exitosamente a:\n" + fileToSave.getAbsolutePath(), "Exportación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Ocurrió un error al guardar el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_btnExportarActionPerformed
+
+    private void listaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaActionPerformed
+
+    private void VIEJOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VIEJOSActionPerformed
+
+        ordenarPorColumna(lista.getSelectedIndex(), false);
+    }//GEN-LAST:event_VIEJOSActionPerformed
+
+    private void NUEVOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NUEVOSActionPerformed
+        ordenarPorColumna(lista.getSelectedIndex(), true);
+    }//GEN-LAST:event_NUEVOSActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        ReporteDTO dto = new ReporteDTO();
+        Date date1 = txtFechaInicio.getDate();
+        Date date2 = txtFechaFin.getDate();
+
+        if (date1 == null) {
+            JOptionPane.showMessageDialog(null, "Debe Colocar Fecha Inicio");
+        } else if (date2 == null) {
+            JOptionPane.showMessageDialog(null, "Debe Colocar Fecha Fin");
+        } else {
+
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaInicio = null;
+            String fechaFin = null;
+            fechaInicio = format1.format(date1);
+            fechaFin = format2.format(date2);
+
+            dto.setFechaInicio(fechaInicio);
+            dto.setFechaFin(fechaFin);
+
+            CargarTabla(dto);
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton NUEVOS;
     private javax.swing.JButton VIEJOS;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnExportar;
     private javax.swing.JPanel cartel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

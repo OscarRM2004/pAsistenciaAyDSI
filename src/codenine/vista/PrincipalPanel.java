@@ -18,6 +18,16 @@ import codenine.modelo.PersonaImpl;
 import codenine.modelo.VistaMensajes;
 import javax.swing.table.DefaultTableModel;
 
+import java.awt.Image;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import codenine.modelo.AsistenciaImpl; // Asegúrate de que esta importación sea correcta
+
 public class PrincipalPanel extends javax.swing.JPanel {
 
     JComboBox comboBox = new JComboBox();
@@ -32,7 +42,21 @@ public class PrincipalPanel extends javax.swing.JPanel {
     
     void CargarTablaPersonas() {
         PersonaImpl proc = new PersonaImpl(); // 'PersonaImpl' ahora es nuestro DAO de personas
-        tbUsuariosWeb.setModel(proc.tablaCredencialesWeb());
+    }
+    
+    private void configurarColumnasVisibles() {
+        // Asegurarse de que la tabla tiene columnas antes de intentar modificarlas
+        if (tablaPendientes.getColumnCount() > 0) {
+            // Ocultamos la columna 'ID Persona' que está en el índice 0
+            tablaPendientes.getColumnModel().getColumn(0).setMinWidth(0);
+            tablaPendientes.getColumnModel().getColumn(0).setMaxWidth(0);
+            tablaPendientes.getColumnModel().getColumn(0).setWidth(0);
+
+            // Ocultamos la columna 'Ruta Evidencia' que está en el índice 3
+            tablaPendientes.getColumnModel().getColumn(3).setMinWidth(0);
+            tablaPendientes.getColumnModel().getColumn(3).setMaxWidth(0);
+            tablaPendientes.getColumnModel().getColumn(3).setWidth(0);
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -40,18 +64,21 @@ public class PrincipalPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        chooserFechaConfirmacion = new com.toedter.calendar.JDateChooser();
         btnRegresar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbUsuariosWeb = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        btnCrearCuentaWeb = new javax.swing.JButton();
-        txtNewPassword = new javax.swing.JPasswordField();
-        txtWebUser = new javax.swing.JTextField();
+        btnBuscarPendientes = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaPendientes = new javax.swing.JTable();
+        lblEvidencia = new javax.swing.JLabel();
+        btnConfirmar = new javax.swing.JButton();
+        btnRechazar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(850, 560));
+        setPreferredSize(new java.awt.Dimension(1000, 550));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(chooserFechaConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 160, 40));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/regresar.png"))); // NOI18N
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -59,11 +86,22 @@ public class PrincipalPanel extends javax.swing.JPanel {
                 btnRegresarActionPerformed(evt);
             }
         });
+        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 713, 54, 0));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setText("Cuentas");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Fecha a revisar:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, 20));
 
-        tbUsuariosWeb.setModel(new javax.swing.table.DefaultTableModel(
+        btnBuscarPendientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lupa2.png"))); // NOI18N
+        btnBuscarPendientes.setText("Buscar Pendientes");
+        btnBuscarPendientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarPendientesActionPerformed(evt);
+            }
+        });
+        add(btnBuscarPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 200, 60));
+
+        tablaPendientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -74,77 +112,37 @@ public class PrincipalPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbUsuariosWeb.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaPendientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbUsuariosWebMouseClicked(evt);
+                tablaPendientesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbUsuariosWeb);
+        jScrollPane1.setViewportView(tablaPendientes);
 
-        jLabel1.setText("Email (Usuario):");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 420, 250));
 
-        jLabel3.setText("Contraseña:");
+        lblEvidencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        add(lblEvidencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 390, 250));
 
-        btnCrearCuentaWeb.setText("CREAR/ACTUALIZAR CUENTA");
-        btnCrearCuentaWeb.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmar.setText("Confirmar Asistencia");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearCuentaWebActionPerformed(evt);
+                btnConfirmarActionPerformed(evt);
             }
         });
+        add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, 160, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtWebUser)
-                                    .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnCrearCuentaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(362, 362, 362)
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(407, 407, 407)
-                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtWebUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addComponent(btnCrearCuentaWeb)
-                        .addGap(161, 161, 161))))
-        );
+        btnRechazar.setText("Rechazar");
+        btnRechazar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRechazarActionPerformed(evt);
+            }
+        });
+        add(btnRechazar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 460, 100, 40));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setText("CONFIRMACION DE ASISTENCIA");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, -1, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -153,64 +151,123 @@ public class PrincipalPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void tbUsuariosWebMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosWebMouseClicked
-        // Obtenemos el modelo de la tabla
-        DefaultTableModel model = (DefaultTableModel) tbUsuariosWeb.getModel();
-
-        // Obtenemos el índice de la fila seleccionada
-        int selectedRow = tbUsuariosWeb.getSelectedRow();
-
-        // Verificamos que se haya seleccionado una fila válida
-        if (selectedRow >= 0) {
-            // Obtenemos el email de la segunda columna (índice 1) de la fila seleccionada
-            String email = model.getValueAt(selectedRow, 1).toString();
-
-            // Ponemos el email en el campo de texto correspondiente
-            // Asumo que el campo de texto se llama 'txtWebUser' o similar
-            txtWebUser.setText(email); 
-
-            // Limpiamos el campo de contraseña para que el admin escriba una nueva
-            // Asumo que el campo de contraseña se llama 'txtNewPassword'
-            txtNewPassword.setText(""); 
-        }
-    }//GEN-LAST:event_tbUsuariosWebMouseClicked
-
-    private void btnCrearCuentaWebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaWebActionPerformed
-        String email = txtWebUser.getText();
-        String password = new String(txtNewPassword.getPassword());
-
-        if (email.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione un usuario de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (password.isEmpty() || password.length() < 6) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese una contraseña válida (mínimo 6 caracteres).", "Error", JOptionPane.ERROR_MESSAGE);
+    private void btnBuscarPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPendientesActionPerformed
+        Date fechaSeleccionada = chooserFechaConfirmacion.getDate();
+        if (fechaSeleccionada == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una fecha.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        PersonaImpl per = new PersonaImpl();
-        // Usamos el método que ya habíamos preparado para actualizar la contraseña
-        boolean exito = per.actualizarPasswordWeb(email, password);
+        // Formateamos la fecha al formato YYYY-MM-DD que usa la base de datos
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaFormateada = sdf.format(fechaSeleccionada);
 
-        if (exito) {
-            JOptionPane.showMessageDialog(this, "Contraseña actualizada exitosamente para el usuario " + email);
-            txtNewPassword.setText("");
+        // Llamamos al DAO para obtener las asistencias pendientes
+        AsistenciaImpl asistenciaDAO = new AsistenciaImpl();
+        DefaultTableModel modelo = asistenciaDAO.getAsistenciasPendientes(fechaFormateada);
+
+        tablaPendientes.setModel(modelo);
+
+        // tablaPendientes.removeColumn(tablaPendientes.getColumnModel().getColumn(4));
+        configurarColumnasVisibles();
+    }//GEN-LAST:event_btnBuscarPendientesActionPerformed
+
+    private void tablaPendientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPendientesMouseClicked
+        int filaSeleccionada = tablaPendientes.getSelectedRow();
+        if (filaSeleccionada < 0) {
+            return; // No hay fila seleccionada
+        }
+
+        // Obtenemos la ruta relativa de la evidencia (ej: "uploads/Captura de pantalla...")
+        String rutaEvidencia = tablaPendientes.getValueAt(filaSeleccionada, 3).toString();
+
+        try {
+            // --- LÍNEA CLAVE DE LA SOLUCIÓN ---
+            // Reemplazamos los espacios en la ruta con "%20" para crear una URL válida.
+            String rutaCodificada = rutaEvidencia.replace(" ", "%20");
+            // ---------------------------------
+
+            // Construimos la URL completa y correcta
+            URL urlImagen = new URL("http://136.0.42.211/" + rutaCodificada);
+
+            // Cargamos la imagen desde la URL
+            Image imagen = ImageIO.read(urlImagen);
+
+            if (imagen != null) {
+                // Redimensionamos la imagen para que quepa en el JLabel
+                // Ajusta el tamaño (ej. 200x200) según el tamaño de tu lblEvidencia
+                Image imagenRedimensionada = imagen.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                lblEvidencia.setIcon(new ImageIcon(imagenRedimensionada));
+                lblEvidencia.setText(""); // Limpiamos cualquier texto de error
+            } else {
+                lblEvidencia.setIcon(null);
+                lblEvidencia.setText("No se pudo decodificar la imagen.");
+            }
+        } catch (Exception e) {
+            lblEvidencia.setIcon(null);
+            lblEvidencia.setText("Error al cargar la imagen.");
+            // Imprimimos el error en la consola para tener más detalles
+            e.printStackTrace(); 
+        }
+    }//GEN-LAST:event_tablaPendientesMouseClicked
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        int filaSeleccionada = tablaPendientes.getSelectedRow();
+        if (filaSeleccionada < 0) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un registro de la tabla para confirmar.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Obtenemos los datos de la fila seleccionada
+        int idPersona = (int) tablaPendientes.getValueAt(filaSeleccionada, 0);
+        String fecha = tablaPendientes.getValueAt(filaSeleccionada, 4).toString(); // Obtenemos la fecha de la columna 4
+
+        AsistenciaImpl asistenciaDAO = new AsistenciaImpl();
+        if (asistenciaDAO.confirmarAsistencia(idPersona, fecha)) {
+            JOptionPane.showMessageDialog(this, "Asistencia confirmada exitosamente.");
+            // Quitamos la fila de la tabla para que ya no aparezca como pendiente
+            ((DefaultTableModel) tablaPendientes.getModel()).removeRow(filaSeleccionada);
+            lblEvidencia.setIcon(null); // Limpiamos la imagen
         } else {
-            JOptionPane.showMessageDialog(this, "Ocurrió un error al actualizar la contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ocurrió un error al confirmar la asistencia.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnCrearCuentaWebActionPerformed
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    private void btnRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarActionPerformed
+        int filaSeleccionada = tablaPendientes.getSelectedRow();
+        if (filaSeleccionada < 0) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un registro de la tabla para rechazar.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea rechazar y eliminar este registro de asistencia?", "Confirmar Rechazo", JOptionPane.YES_NO_OPTION);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            int idPersona = (int) tablaPendientes.getValueAt(filaSeleccionada, 0);
+            String fecha = tablaPendientes.getValueAt(filaSeleccionada, 4).toString();
+
+            AsistenciaImpl asistenciaDAO = new AsistenciaImpl();
+            if (asistenciaDAO.rechazarAsistencia(idPersona, fecha)) {
+                JOptionPane.showMessageDialog(this, "Asistencia rechazada y eliminada exitosamente.");
+                ((DefaultTableModel) tablaPendientes.getModel()).removeRow(filaSeleccionada);
+                lblEvidencia.setIcon(null);
+            } else {
+                JOptionPane.showMessageDialog(this, "Ocurrió un error al rechazar la asistencia.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnRechazarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCrearCuentaWeb;
+    private javax.swing.JButton btnBuscarPendientes;
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnRechazar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JDateChooser chooserFechaConfirmacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbUsuariosWeb;
-    private javax.swing.JPasswordField txtNewPassword;
-    private javax.swing.JTextField txtWebUser;
+    private javax.swing.JLabel lblEvidencia;
+    private javax.swing.JTable tablaPendientes;
     // End of variables declaration//GEN-END:variables
 }

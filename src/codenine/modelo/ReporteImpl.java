@@ -32,6 +32,7 @@ public class ReporteImpl {
                     + "inner join area on area.idarea = persona.idareafk\n"
                     + "inner join ocurrencia on ocurrencia.idocurrencia = asistencia.idocurrencia\n"
                     + "where fecha between '" + dto.getFechaInicio() + "' and '" + dto.getFechaFin() + "'\n"
+                    + "AND asistencia.asistencia_confirmada = 1\n"
                     + "order by fecha desc";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);

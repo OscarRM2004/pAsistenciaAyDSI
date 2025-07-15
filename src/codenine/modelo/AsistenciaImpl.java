@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 public class AsistenciaImpl implements AsistenciaInterfaz {
 
@@ -181,5 +182,67 @@ public class AsistenciaImpl implements AsistenciaInterfaz {
             conn.CerrarConexion();
         }
         return Modelo;
+    }
+    
+    public DefaultTableModel getAsistenciasPendientes(String fecha) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID Persona");
+        modelo.addColumn("Nombre Completo");
+        modelo.addColumn("Ocurrencia");
+        modelo.addColumn("Ruta Evidencia");
+        modelo.addColumn("Fecha"); // Columna oculta para usarla después
+
+        String sql = "SELECT p.idpersona, CONCAT(p.nombre, ' ', p.paterno), o.descripcion, a.detalle, a.fecha " +
+                     "FROM asistencia a " +
+                     "JOIN persona p ON a.idpersona = p.idpersona " +
+                     "JOIN ocurrencia o ON a.idocurrencia = o.idocurrencia " +
+                     "WHERE a.fecha = ? AND a.asistencia_confirmada = 0";
+
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, fecha);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Object[] fila = new Object[5];
+                fila[0] = rs.getInt(1);
+                fila[1] = rs.getString(2);
+                fila[2] = rs.getString(3);
+                fila[3] = rs.getString(4);
+                fila[4] = rs.getString(5);
+                modelo.addRow(fila);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener asistencias pendientes: " + e.getMessage());
+        }
+        return modelo;
+    }
+
+    // Método para confirmar una asistencia
+    public boolean confirmarAsistencia(int idPersona, String fecha) {
+        String sql = "UPDATE asistencia SET asistencia_confirmada = 1 WHERE idpersona = ? AND fecha = ?";
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idPersona);
+            stmt.setString(2, fecha);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error al confirmar asistencia: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // Método para rechazar (eliminar) una asistencia
+    public boolean rechazarAsistencia(int idPersona, String fecha) {
+        String sql = "DELETE FROM asistencia WHERE idpersona = ? AND fecha = ?";
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idPersona);
+            stmt.setString(2, fecha);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error al rechazar asistencia: " + e.getMessage());
+            return false;
+        }
     }
 }

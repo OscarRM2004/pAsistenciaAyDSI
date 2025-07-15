@@ -137,20 +137,20 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 430, 130));
 
         content.setBackground(new java.awt.Color(255, 255, 255));
-        content.setPreferredSize(new java.awt.Dimension(850, 850));
+        content.setPreferredSize(new java.awt.Dimension(1000, 550));
 
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 550, Short.MAX_VALUE)
         );
 
-        jPanel1.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 850, 550));
+        jPanel1.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 1000, 550));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -193,7 +193,7 @@ public class Menu extends javax.swing.JFrame {
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addContainerGap(1236, Short.MAX_VALUE)
+                .addContainerGap(1436, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -205,13 +205,13 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jPanel1.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 60));
+        jPanel1.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1305, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +224,7 @@ public class Menu extends javax.swing.JFrame {
     private void btnAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAreaActionPerformed
         // PASO CLAVE: pasamos 'this' al constructor
         AreaPanel ma = new AreaPanel(this);
-        ma.setSize(850,550);
+        ma.setSize(1000,550);
         ma.setLocation(0, 0);
         content.removeAll();
         content.add(ma, BorderLayout.CENTER);
@@ -234,7 +234,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
         PersonaPanel pp= new PersonaPanel(this);
-        pp.setSize(850,550);
+        pp.setSize(1000,550);
         pp.setLocation(0,0);
         content.removeAll();
         content.add(pp,BorderLayout.CENTER);
@@ -244,7 +244,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsistenciaActionPerformed
         PrincipalPanel ppn= new PrincipalPanel(this);
-        ppn.setSize(850,550);
+        ppn.setSize(1000,550);
         ppn.setLocation(0,0);
         content.removeAll();
         content.add(ppn,BorderLayout.CENTER);
@@ -254,7 +254,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
         ReportesPanel rp= new ReportesPanel(this);
-        rp.setSize(850,550);
+        rp.setSize(1000,550);
         rp.setLocation(0,0);
         content.removeAll();
         content.add(rp,BorderLayout.CENTER);
@@ -279,7 +279,7 @@ public class Menu extends javax.swing.JFrame {
 
 
     public static void main(String args[]) {
-        
+        java.util.TimeZone.setDefault(java.util.TimeZone.getTimeZone("America/Lima"));
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 

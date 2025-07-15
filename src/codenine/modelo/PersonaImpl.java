@@ -12,19 +12,27 @@ import java.sql.Statement;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.commons.lang3.StringUtils;
 
 public class PersonaImpl implements PersonaInterfaz {
-
+    private static final Logger logger = LoggerFactory.getLogger(PersonaImpl.class);
     Conexion con = new Conexion();
     Connection conn = con.ConeccionSQL();
     RepositorioTemporalPersona repositorioTemporal = new RepositorioTemporalPersona(); // Crear instancia del repositorio temporal
 
     @Override
     public void registrar(PersonaDto p) {
-        // La contraseña web es null al principio
-        String sql = "INSERT INTO persona (idpersona, nombre, paterno, materno, sexo, cargo, idareafk, email, web_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NULL)";
+        // La consulta SQL ahora incluye el campo web_password
+        String sql = "INSERT INTO persona (idpersona, nombre, paterno, materno, sexo, cargo, idareafk, email, web_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
+            // Reutilizamos la conexión de la clase
+            if (this.conn == null || this.conn.isClosed()) {
+                this.conn = con.ConeccionSQL();
+            }
+
             PreparedStatement stament = conn.prepareStatement(sql);
             stament.setInt(1, p.getIdPersona());
             stament.setString(2, p.getNombre());
@@ -33,17 +41,24 @@ public class PersonaImpl implements PersonaInterfaz {
             stament.setString(5, p.getSexo());
             stament.setString(6, p.getCargo());
             stament.setInt(7, p.getIdArea());
-            stament.setString(8, p.getEmail()); // Nuevo
+            stament.setString(8, p.getEmail());
+
+            // --- PARÁMETRO NUEVO ---
+            // Añadimos la contraseña al PreparedStatement.
+            // Se guarda como texto plano para que el primer login en la web la convierta a hash.
+            stament.setString(9, p.getWeb_password());
+            // -----------------------
 
             int rowsInsert = stament.executeUpdate();
             if (rowsInsert > 0) {
-                JOptionPane.showMessageDialog(null, "Se ingresó una persona correctamente");
+                logger.info("Persona registrada con éxito con ID: {} y Email: {}", p.getIdPersona(), p.getEmail());
+                JOptionPane.showMessageDialog(null, "Persona y cuenta web registradas correctamente");
             }
         } catch (SQLException sqle) {
+            logger.error("Error de SQL al registrar persona", sqle);
             JOptionPane.showMessageDialog(null, "Error SQL al registrar: " + sqle.getMessage());
-        } finally {
-            con.CerrarConexion();
-        }
+        } 
+        // No cerramos la conexión aquí para poder reutilizarla.
     }
 
     @Override
@@ -104,30 +119,49 @@ public class PersonaImpl implements PersonaInterfaz {
 
     @Override
     public void actualizar(PersonaDto p) {
-        // No actualizamos la contraseña desde aquí
-        String sql = "UPDATE persona SET nombre=?, paterno=?, materno=?, sexo=?, cargo=?, idareafk=?, email=? WHERE idpersona=?";
+        // Usaremos un StringBuilder para construir la consulta SQL dinámicamente.
+        StringBuilder sql = new StringBuilder("UPDATE persona SET nombre=?, paterno=?, materno=?, sexo=?, cargo=?, idareafk=?, email=?");
+
+        // Si el objeto PersonaDto contiene una contraseña, añadimos la parte de la contraseña a la consulta SQL.
+        if (p.getWeb_password() != null && !p.getWeb_password().isEmpty()) {
+            sql.append(", web_password=?");
+        }
+        sql.append(" WHERE idpersona=?");
 
         try {
-            PreparedStatement stament = conn.prepareStatement(sql);
+            if (this.conn == null || this.conn.isClosed()) {
+                this.conn = con.ConeccionSQL();
+            }
+
+            PreparedStatement stament = conn.prepareStatement(sql.toString());
+
+            // Asignamos los parámetros que siempre están presentes
             stament.setString(1, p.getNombre());
             stament.setString(2, p.getApPaterno());
             stament.setString(3, p.getApMaterno());
             stament.setString(4, p.getSexo());
             stament.setString(5, p.getCargo());
             stament.setInt(6, p.getIdArea());
-            stament.setString(7, p.getEmail()); // Nuevo
-            stament.setInt(8, p.getIdPersona());
+            stament.setString(7, p.getEmail());
+
+            // Usamos un índice para los parámetros que pueden variar
+            int parametroIndex = 8;
+            if (p.getWeb_password() != null && !p.getWeb_password().isEmpty()) {
+                stament.setString(parametroIndex, p.getWeb_password());
+                parametroIndex++; // Incrementamos el índice para el siguiente parámetro
+            }
+
+            // Asignamos el último parámetro, que es el idpersona
+            stament.setInt(parametroIndex, p.getIdPersona());
+
             int rowsupdated = stament.executeUpdate();
             if (rowsupdated > 0) {
-                JOptionPane.showMessageDialog(null, "Se actualizó correctamente");
+                JOptionPane.showMessageDialog(null, "Se actualizó una Persona correctamente");
             }
+
         } catch (SQLException e) {
-            System.out.println("Sql Exception: " + e.getMessage());
-            JOptionPane.showMessageDialog(null, "error SQL actualizar: " + e);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "error actualizar: " + ex);
-        } finally {
-            con.CerrarConexion();
+            System.out.println("Sql Exception al actualizar: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error SQL al actualizar: " + e);
         }
     }
 
