@@ -118,8 +118,8 @@ public class ReportesPanel extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(36, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +180,7 @@ public class ReportesPanel extends javax.swing.JPanel {
                 .addGroup(cartelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cartelLayout.createSequentialGroup()
                         .addComponent(lista, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
                         .addComponent(NUEVOS, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(cartelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -218,7 +218,7 @@ public class ReportesPanel extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
-        add(cartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 930, -1));
+        add(cartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 920, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/regresar.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -228,13 +228,14 @@ public class ReportesPanel extends javax.swing.JPanel {
         });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, -1, -1));
 
+        btnExportar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnExportar.setText("Exportar a Excel");
         btnExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExportarActionPerformed(evt);
             }
         });
-        add(btnExportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 500, -1, -1));
+        add(btnExportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 500, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private Date[] mergeAbajo(Date[] left, Date[] right) {

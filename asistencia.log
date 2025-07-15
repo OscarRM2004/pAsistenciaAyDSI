@@ -47,3 +47,7 @@ java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '2' for key '
 	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
 	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
 2025-07-15 09:00:14.292 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 3 y Email: jesus2584563@gmail.com
+2025-07-15 11:10:32.451 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 5 y Email: oscaralfreditorm@gmail.com
+2025-07-15 12:33:03.357 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 999 y Email: prueba@integracion.com
+2025-07-15 12:44:44.153 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 6 y Email: logistica@gmail.com
+2025-07-15 13:37:22.575 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 888 y Email: carlos.flujo@test.com
