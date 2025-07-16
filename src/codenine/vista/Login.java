@@ -104,7 +104,7 @@ public class Login extends javax.swing.JFrame {
         String username = txt_user.getText();
         String password = new String(txt_pass.getPassword());
 
-        if("admin".equals(username) && "1234".equals(password)){
+        if("Admin".equals(username) && "12345".equals(password)){
             Menu menu = new Menu();
             menu.setVisible(true);
             this.dispose();

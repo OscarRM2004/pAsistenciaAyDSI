@@ -76,19 +76,19 @@
         <property name="store.jar" value="${store.dir}/${application.title}.jar"/>
 
         <echo message="Empaquetando todo en un solo JAR en ${store.jar}"/>
-        
+
         <mkdir dir="${store.dir}"/>
 
         <jar destfile="${store.jar}" filesetmanifest="skip">
-            
-            <zipgroupfileset dir="${dist.dir}" includes="*.jar"/>
-            
+
+            <fileset dir="build/classes"/>
+
             <zipgroupfileset dir="${dist.dir}/lib" includes="*.jar"/>
-            
+
             <manifest>
                 <attribute name="Main-Class" value="${main.class}"/>
             </manifest>
         </jar>
     </target>
-
+    
 </project>
