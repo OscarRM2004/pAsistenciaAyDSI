@@ -1,54 +1,7 @@
-2025-07-15 08:59:42.845 [AWT-EventQueue-0] ERROR codenine.modelo.PersonaImpl - Error de SQL al registrar persona
-java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '2' for key 'persona.PRIMARY'
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:109)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:990)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1168)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1103)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1450)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1086)
-	at codenine.modelo.PersonaImpl.registrar(PersonaImpl.java:52)
-	at codenine.modelo.PersonaImpl.registrar(PersonaImpl.java:19)
-	at codenine.vista.PersonaPanel.btnRegistrarActionPerformed(PersonaPanel.java:359)
-	at codenine.vista.PersonaPanel$5.actionPerformed(PersonaPanel.java:237)
-	at java.desktop/javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1972)
-	at java.desktop/javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2314)
-	at java.desktop/javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:407)
-	at java.desktop/javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262)
-	at java.desktop/javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:279)
-	at java.desktop/java.awt.Component.processMouseEvent(Component.java:6621)
-	at java.desktop/javax.swing.JComponent.processMouseEvent(JComponent.java:3404)
-	at java.desktop/java.awt.Component.processEvent(Component.java:6386)
-	at java.desktop/java.awt.Container.processEvent(Container.java:2266)
-	at java.desktop/java.awt.Component.dispatchEventImpl(Component.java:4996)
-	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2324)
-	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4828)
-	at java.desktop/java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4948)
-	at java.desktop/java.awt.LightweightDispatcher.processMouseEvent(Container.java:4575)
-	at java.desktop/java.awt.LightweightDispatcher.dispatchEvent(Container.java:4516)
-	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2310)
-	at java.desktop/java.awt.Window.dispatchEventImpl(Window.java:2780)
-	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4828)
-	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:775)
-	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)
-	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
-	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
-	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:98)
-	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:747)
-	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:745)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
-	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
-	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:744)
-	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
-	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
-	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
-	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
-	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
-2025-07-15 09:00:14.292 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 3 y Email: jesus2584563@gmail.com
-2025-07-15 11:10:32.451 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 5 y Email: oscaralfreditorm@gmail.com
-2025-07-15 12:33:03.357 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 999 y Email: prueba@integracion.com
-2025-07-15 12:44:44.153 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 6 y Email: logistica@gmail.com
-2025-07-15 13:37:22.575 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 888 y Email: carlos.flujo@test.com
-2025-07-15 19:17:49.129 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 789 y Email: seguridad@test.com
+2025-07-22 12:42:09.657 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 1 y Email: carla.ramirez@drvise.com
+2025-07-22 12:44:22.538 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 2 y Email: carla.ramirez@drvise.com
+2025-07-22 12:45:08.255 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 3 y Email: jose.huaman@drvise.com
+2025-07-22 12:45:52.203 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 4 y Email: mariana.leon@drvise.com
+2025-07-22 12:46:39.707 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 5 y Email: eduardo.castillo@drvise.com
+2025-07-22 12:47:12.096 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 6 y Email: ana.gomez@drvise.com
+2025-07-22 12:47:45.716 [AWT-EventQueue-0] INFO  codenine.modelo.PersonaImpl - Persona registrada con éxito con ID: 1 y Email: oscarestebanrm2004@gmail.com

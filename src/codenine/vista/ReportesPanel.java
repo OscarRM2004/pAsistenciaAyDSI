@@ -131,14 +131,15 @@ public class ReportesPanel extends javax.swing.JPanel {
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 239, 988, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setText("REPORTE DE ASISTENCIA DEL PERSONAL");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, -1));
+        jLabel2.setText("REPORTE DE ASISTENCIA");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, -1, -1));
 
         cartel.setBackground(new java.awt.Color(255, 255, 255));
         cartel.setBorder(javax.swing.BorderFactory.createTitledBorder("Formulario"));
 
         jLabel1.setText("Fecha Inicio:");
 
+        btnBuscar.setBackground(new java.awt.Color(0, 191, 152));
         btnBuscar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lupa.png"))); // NOI18N
         btnBuscar.setText("BUSCAR");
@@ -150,6 +151,7 @@ public class ReportesPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Fecha Fin:");
 
+        NUEVOS.setBackground(new java.awt.Color(0, 191, 152));
         NUEVOS.setText("ASCENDENTE");
         NUEVOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,6 +159,7 @@ public class ReportesPanel extends javax.swing.JPanel {
             }
         });
 
+        VIEJOS.setBackground(new java.awt.Color(0, 191, 152));
         VIEJOS.setText("DESCENDENTE");
         VIEJOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,7 +167,8 @@ public class ReportesPanel extends javax.swing.JPanel {
             }
         });
 
-        lista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "A. Paterno", "A. Materno", "Sexo", "Cargo", "Area", "Ocurrencia", "Fecha" }));
+        lista.setBackground(new java.awt.Color(0, 191, 152));
+        lista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "A. Paterno", "A. Materno", "Sexo", "Cargo", "Local", "Ocurrencia", "Fecha" }));
         lista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaActionPerformed(evt);
@@ -228,6 +232,7 @@ public class ReportesPanel extends javax.swing.JPanel {
         });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, -1, -1));
 
+        btnExportar.setBackground(new java.awt.Color(0, 191, 152));
         btnExportar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnExportar.setText("Exportar a Excel");
         btnExportar.addActionListener(new java.awt.event.ActionListener() {

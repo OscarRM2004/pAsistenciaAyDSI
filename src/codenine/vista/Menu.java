@@ -21,10 +21,6 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -48,46 +44,30 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ASISTENCIA");
+        jLabel1.setText("ASISTENCIA DR.VISE");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 130));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Colegio2.png"))); // NOI18N
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 100, 110));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reportes2.png"))); // NOI18N
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 100, 100));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/registroasistencia2.png"))); // NOI18N
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 100, 100));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user2.png"))); // NOI18N
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 100, 100));
-
         jLabel6.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
-        jLabel6.setText("CONFIRMACION DE ASISTENCIA");
+        jLabel6.setText("VERIFICAR ASISTENCIA");
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, -1, 20));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, 20));
 
         jLabel7.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         jLabel7.setText("REGISTRO DE PERSONAL");
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, -1, 20));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, -1, 20));
 
         jLabel8.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         jLabel8.setText("REPORTES");
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 580, -1, 20));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, -1, 20));
 
         jLabel9.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
-        jLabel9.setText("REGISTRO DE AREA");
+        jLabel9.setText("REGISTRO DE LOCAL");
         jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 170, 20));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 180, 20));
 
-        btnArea.setBackground(new java.awt.Color(242, 242, 242));
+        btnArea.setBackground(new java.awt.Color(147, 206, 29));
         btnArea.setFont(new java.awt.Font("Roboto Black", 1, 20)); // NOI18N
         btnArea.setToolTipText("");
         btnArea.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -100,7 +80,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(btnArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 430, 130));
 
-        btnPersona.setBackground(new java.awt.Color(242, 242, 242));
+        btnPersona.setBackground(new java.awt.Color(147, 206, 29));
         btnPersona.setFont(new java.awt.Font("Roboto Black", 1, 20)); // NOI18N
         btnPersona.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnPersona.setBorderPainted(false);
@@ -112,7 +92,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 430, 130));
 
-        btnAsistencia.setBackground(new java.awt.Color(242, 242, 242));
+        btnAsistencia.setBackground(new java.awt.Color(147, 206, 29));
         btnAsistencia.setFont(new java.awt.Font("Roboto Black", 1, 20)); // NOI18N
         btnAsistencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAsistencia.setBorderPainted(false);
@@ -124,7 +104,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(btnAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 430, 130));
 
-        btnReportes.setBackground(new java.awt.Color(242, 242, 242));
+        btnReportes.setBackground(new java.awt.Color(147, 206, 29));
         btnReportes.setFont(new java.awt.Font("Roboto Black", 1, 20)); // NOI18N
         btnReportes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnReportes.setBorderPainted(false);
@@ -151,6 +131,8 @@ public class Menu extends javax.swing.JFrame {
         );
 
         jPanel1.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 1000, 550));
+
+        jPanel2.setBackground(new java.awt.Color(147, 206, 29));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -324,10 +306,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel header;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

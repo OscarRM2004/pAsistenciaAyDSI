@@ -20,7 +20,7 @@ public class ReporteImpl {
         Modelo.addColumn("Materno");
         Modelo.addColumn("Sexo");
         Modelo.addColumn("Cargo");
-        Modelo.addColumn("Area");
+        Modelo.addColumn("Local");
         Modelo.addColumn("Ocurrencia");
         Modelo.addColumn("Fecha");
 

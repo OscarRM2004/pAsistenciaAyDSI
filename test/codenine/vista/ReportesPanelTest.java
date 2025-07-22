@@ -1,19 +1,11 @@
 package codenine.vista;
-
-// Importaciones de JUNIT 4
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-// El resto de las importaciones son las mismas
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Pruebas unitarias para la clase ReportesPanel (escritas con sintaxis de JUnit 4).
- */
 public class ReportesPanelTest {
-
     @Test // Esta anotación ahora viene de org.junit.Test
     public void testMergeSort_DeberiaOrdenarFechasDescendentemente() {
         System.out.println("Ejecutando prueba para mergeSort con JUnit 4");

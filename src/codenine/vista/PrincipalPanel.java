@@ -64,6 +64,7 @@ public class PrincipalPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jButton1 = new javax.swing.JButton();
         chooserFechaConfirmacion = new com.toedter.calendar.JDateChooser();
         btnRegresar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -78,7 +79,15 @@ public class PrincipalPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1000, 550));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(chooserFechaConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 160, 40));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/regresar.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 40, -1, -1));
+        add(chooserFechaConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 160, 40));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/regresar.png"))); // NOI18N
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,8 +99,9 @@ public class PrincipalPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Fecha a revisar:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, 20));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, -1, 20));
 
+        btnBuscarPendientes.setBackground(new java.awt.Color(0, 191, 152));
         btnBuscarPendientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lupa2.png"))); // NOI18N
         btnBuscarPendientes.setText("Buscar Pendientes");
         btnBuscarPendientes.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +109,7 @@ public class PrincipalPanel extends javax.swing.JPanel {
                 btnBuscarPendientesActionPerformed(evt);
             }
         });
-        add(btnBuscarPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 200, 60));
+        add(btnBuscarPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, 200, 60));
 
         tablaPendientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,26 +129,28 @@ public class PrincipalPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tablaPendientes);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 420, 250));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 420, 250));
 
         lblEvidencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        add(lblEvidencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 390, 250));
+        add(lblEvidencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, 390, 250));
 
+        btnConfirmar.setBackground(new java.awt.Color(0, 191, 152));
         btnConfirmar.setText("Confirmar Asistencia");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarActionPerformed(evt);
             }
         });
-        add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, 160, 40));
+        add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 480, 160, 40));
 
+        btnRechazar.setBackground(new java.awt.Color(0, 191, 152));
         btnRechazar.setText("Rechazar");
         btnRechazar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRechazarActionPerformed(evt);
             }
         });
-        add(btnRechazar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 460, 100, 40));
+        add(btnRechazar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 480, 100, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("CONFIRMACION DE ASISTENCIA");
@@ -257,6 +269,12 @@ public class PrincipalPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRechazarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (menuPrincipal != null) {
+            menuPrincipal.limpiarPanelContenido();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarPendientes;
     private javax.swing.JButton btnConfirmar;
@@ -264,6 +282,7 @@ public class PrincipalPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnRegresar;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.toedter.calendar.JDateChooser chooserFechaConfirmacion;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
